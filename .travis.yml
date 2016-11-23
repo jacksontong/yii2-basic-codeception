@@ -17,7 +17,6 @@ cache:
 
 before_script:
   - phantomjs --version
-  - apt-get install curl
   - phantomjs --webdriver=4444 >/dev/null 2>&1 &
   - mysql -u root -e 'CREATE DATABASE yii2_basic_tests;'
   - mysql --version
