@@ -1,0 +1,12 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://127.0.0.1:8888/
+            browser: phantomjs
+            window_size: 1024x768
+            http_proxy: direct
+        - Yii2:
+            part: orm
+            entryScript: index-test.php
+            cleanup: false

@@ -1,0 +1,29 @@
+sudo: false
+language: php
+
+php:
+  - 7.1
+  - nightly
+
+services:
+  - mysql
+
+install:
+  - composer install
+
+cache:
+  directories:
+      - $HOME/.composer/cache
+
+before_script:
+  - phantomjs --version
+  - phantomjs --webdriver=4444 >/dev/null 2>&1 &
+  - mysql -u root -e 'CREATE DATABASE yii2_basic_tests;'
+  - mysql --version
+  - php tests/bin/yii migrate
+  - php -S 127.0.0.1:8888 -t web >/dev/null 2>&1 &
+
+script: composer exec codecept run
+
+notifications:
+  email: false
