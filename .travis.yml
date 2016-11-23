@@ -21,8 +21,8 @@ before_script:
   - mysql -u root -e 'CREATE DATABASE yii2_basic_tests;'
   - mysql --version
   - php tests/bin/yii migrate
-  - php -S localhost:8080 -t web >/dev/null 2>&1 &
-  - curl http://localhost:8080
+  - test/bin/yii serve >/dev/null 2>&1 &
+  - curl http://127.0.0.1:8080
 
 script: composer exec codecept run
 
