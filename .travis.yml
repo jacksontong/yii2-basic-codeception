@@ -22,7 +22,7 @@ before_script:
   - mysql --version
   - php tests/bin/yii migrate
   - test/bin/yii serve >/dev/null 2>&1 &
-  - curl http://127.0.0.1:8080
+  - curl http://vnexpress.net
 
 script: composer exec codecept run
 
