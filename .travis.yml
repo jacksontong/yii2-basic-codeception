@@ -17,11 +17,13 @@ cache:
 
 before_script:
   - phantomjs --version
+  - apt-get install curl
   - phantomjs --webdriver=4444 >/dev/null 2>&1 &
   - mysql -u root -e 'CREATE DATABASE yii2_basic_tests;'
   - mysql --version
   - php tests/bin/yii migrate
-  - php -S 127.0.0.1:8080 -t web >/dev/null 2>&1 &
+  - php -S localhost:8080 -t web >/dev/null 2>&1 &
+  - curl http://localhost:8080
 
 script: composer exec codecept run
 
