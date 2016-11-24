@@ -18,7 +18,7 @@ before_script:
   - mysql -u root -e 'CREATE DATABASE yii2_basic_tests;'
   - mysql --version
   - php -S 127.0.0.1:8080 -t web >/dev/null 2>&1 &
-  - curl http://vnexpress.net
+  - curl http://127.0.0.1:8080
   - composer install
   - php tests/bin/yii migrate
 
