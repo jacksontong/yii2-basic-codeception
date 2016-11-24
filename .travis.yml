@@ -8,9 +8,6 @@ php:
 services:
   - mysql
 
-install:
-  - composer install
-
 cache:
   directories:
       - $HOME/.composer/cache
@@ -20,9 +17,10 @@ before_script:
   - phantomjs --webdriver=4444 >/dev/null 2>&1 &
   - mysql -u root -e 'CREATE DATABASE yii2_basic_tests;'
   - mysql --version
-  - php tests/bin/yii migrate
-  - test/bin/yii serve >/dev/null 2>&1 &
+  - php -S 127.0.0.1:8080 -t web >/dev/null 2>&1 &
   - curl http://vnexpress.net
+  - composer install
+  - php tests/bin/yii migrate
 
 script: composer exec codecept run
 
