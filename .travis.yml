@@ -3,7 +3,6 @@ language: php
 
 php:
   - 7.1
-  - nightly
 
 services:
   - docker
@@ -18,11 +17,10 @@ cache:
       - $HOME/.composer/cache
 
 before_script:
+  - docker-compose build > /dev/null 2>&1 &
+  - sleep 5
 
-script:
-  - |
-    docker-compose build > /dev/null 2>&1 &
-    composer exec codecept run
+script: composer exec codecept run
 
 notifications:
   email: false
