@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 language: php
 
 php:
@@ -6,23 +6,23 @@ php:
   - nightly
 
 services:
-  - mysql
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.8.1
+
+install: composer install
 
 cache:
   directories:
       - $HOME/.composer/cache
 
 before_script:
-  - phantomjs --version
-  - phantomjs --webdriver=4444 >/dev/null 2>&1 &
-  - mysql -u root -e 'CREATE DATABASE yii2_basic_tests;'
-  - mysql --version
-  - php -S 127.0.0.1:8080 -t web >/dev/null 2>&1 &
-  - curl http://127.0.0.1:8080
-  - composer install
-  - php tests/bin/yii migrate
 
-script: composer exec codecept run
+script:
+  - |
+    docker-compose build > /dev/null 2>&1 &
+    composer exec codecept run
 
 notifications:
   email: false
